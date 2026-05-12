@@ -50,8 +50,8 @@ def create_vector_db():
         shutil.rmtree(DB_PATH)
 
     splitter = RecursiveCharacterTextSplitter(
-        chunk_size=800,
-        chunk_overlap=150
+        chunk_size=1200,
+        chunk_overlap=200
     )
 
     chunks = splitter.split_documents(documents)
@@ -77,7 +77,7 @@ def load_qa_chain():
         embedding_function=embeddings
     )
 
-    retriever = db.as_retriever(search_kwargs={"k": 5})
+    retriever = db.as_retriever(search_kwargs={"k": 8})
 
     llm = ChatOpenAI(
         model=os.getenv("OPENAI_MODEL", "gpt-4o-mini"),
